@@ -1,10 +1,9 @@
 package com.base.template.controller.api;
 
-import java.util.Map;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -23,9 +22,9 @@ public class UserApiController {
 
     @PostMapping("/sign-in")
     @ResponseBody
-    public ResponseEntity<Boolean> signIn(UserInfo user) {
-        userService.signIn(user);
-        return ResponseEntity.ok(true);
+    public ResponseEntity<Boolean> signIn(@RequestBody UserInfo user) {
+        boolean successSignIn = userService.signIn(user);
+        return ResponseEntity.ok(successSignIn);
     };
 
     @PostMapping("/sign-out")
@@ -34,7 +33,7 @@ public class UserApiController {
     };
 
     @PostMapping("get-user-info")
-    public Map<String, Object> getUserInfo(UserInfo user) {
+    public UserInfo getUserInfo(UserInfo user) {
         return userService.getUserInfo(user);
     };
 

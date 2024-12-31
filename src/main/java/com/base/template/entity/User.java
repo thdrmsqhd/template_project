@@ -34,4 +34,14 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    public User(String userId, String userPassword) {
+        this.userId = userId;
+        this.password = userPassword;
+    }
+
+    public User toEntity() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'toEntity'");
+    };
 }

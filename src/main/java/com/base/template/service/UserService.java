@@ -1,10 +1,10 @@
 package com.base.template.service;
 
-import java.util.Map;
-
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.base.template.dto.UserInfo;
+import com.base.template.entity.User;
 import com.base.template.repository.UserRespository;
 
 @Service
@@ -16,15 +16,24 @@ public class UserService {
         this.userRespository = userRespository;
     }
 
-    public void signIn(UserInfo user) {
-        // userRespository.signIn(user);
+    @Transactional
+    public boolean signIn(UserInfo userInfo) {
+        UserInfo findUser = this.getUserInfo(userInfo);
+        if (findUser != null) {
+            return false;
+        }
+
+        User user = userInfo.toEntity();
+        userRespository.save(user);
+
+        return true;
     };
 
     public void signOut(UserInfo user) {
         // userRespository.signOut(user);
     };
 
-    public Map<String, Object> getUserInfo(UserInfo user) {
+    public UserInfo getUserInfo(UserInfo user) {
         // return userRespository.getUserInfo(user);
         return null;
     };

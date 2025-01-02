@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    const response = await fetch("/user/api/sign-in", {
+    const response = await fetch("/api/user/sign-in", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -55,13 +55,13 @@ document.addEventListener("DOMContentLoaded", function () {
       }),
     });
 
-    const data = await response.json();
+    const responseJson = await response.json();
     if (response.status === 200) {
-      if (data) {
+      if (responseJson.data) {
         resultModalBody.textContent = "회원가입이 성공적으로 완료되었습니다.";
-        setTimeout(() => (window.location.href = "/user/log-in"), 1000);
+        setTimeout(() => (window.location.href = "/user/login"), 1000);
       } else {
-        resultModalBody.textContent = "회원가입에 실패했습니다. 다시 시도해주세요.";
+        resultModalBody.textContent = "이미 가입된 이메일 주소입니다.";
       }
       resultModal.show();
     } else {

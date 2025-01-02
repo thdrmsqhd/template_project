@@ -16,7 +16,7 @@ public class UserInfo {
     private String email;
     private String password;
 
-    public UserInfo toDto(User userInfo) {
+    public static UserInfo toDto(User userInfo) {
         return new UserInfo(userInfo.getUserId(), userInfo.getPassword());
     }
 

@@ -11,14 +11,12 @@ import javax.persistence.Table;
 import com.base.template.domain.Role;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -33,15 +31,10 @@ public class User {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private Role role = Role.COMMON;
 
     public User(String userId, String userPassword) {
         this.userId = userId;
         this.password = userPassword;
     }
-
-    public User toEntity() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'toEntity'");
-    };
 }

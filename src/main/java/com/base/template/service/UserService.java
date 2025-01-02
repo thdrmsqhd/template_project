@@ -1,5 +1,6 @@
 package com.base.template.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,15 +11,12 @@ import com.base.template.repository.UserRespository;
 @Service
 public class UserService {
 
-    final UserRespository userRespository;
-
-    public UserService(UserRespository userRespository) {
-        this.userRespository = userRespository;
-    }
+    @Autowired
+    UserRespository userRespository;
 
     @Transactional
     public boolean signIn(UserInfo userInfo) {
-        UserInfo findUser = this.getUserInfo(userInfo);
+        User findUser = this.getUserInfo(userInfo);
         if (findUser != null) {
             return false;
         }
@@ -33,9 +31,8 @@ public class UserService {
         // userRespository.signOut(user);
     };
 
-    public UserInfo getUserInfo(UserInfo user) {
-        // return userRespository.getUserInfo(user);
-        return null;
+    public User getUserInfo(UserInfo user) {
+        return userRespository.findByUserId(user.getEmail());
     };
 
     public void updateInfo(UserInfo user) {
@@ -44,16 +41,6 @@ public class UserService {
 
     public void getUserRole(UserInfo user) {
         // userRespository.getUserRole(user);
-    };
-
-    public boolean logIn(UserInfo user) {
-        // userRespository.logIn(user);
-        return false;
-    };
-
-    public boolean logOut(UserInfo user) {
-        // userRespository.logOut(user);
-        return false;
     };
 
 }

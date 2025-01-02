@@ -7,4 +7,7 @@ import com.base.template.entity.User;
 
 @Repository
 public interface UserRespository extends JpaRepository<User, Long> {
+
+    User findByUserId(String email);
+
 }

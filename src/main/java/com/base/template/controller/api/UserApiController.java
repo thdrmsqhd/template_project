@@ -7,11 +7,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.base.template.domain.ResponseCode;
+import com.base.template.dto.BaseResponseDto;
 import com.base.template.dto.UserInfo;
 import com.base.template.service.UserService;
 
 @Controller
-@RequestMapping("/user/api")
+@RequestMapping("/api/user")
 public class UserApiController {
 
     final UserService userService;
@@ -22,9 +24,13 @@ public class UserApiController {
 
     @PostMapping("/sign-in")
     @ResponseBody
-    public ResponseEntity<Boolean> signIn(@RequestBody UserInfo user) {
+    public ResponseEntity<BaseResponseDto> signIn(@RequestBody UserInfo user) {
         boolean successSignIn = userService.signIn(user);
-        return ResponseEntity.ok(successSignIn);
+        return ResponseEntity.ok(
+                BaseResponseDto.of(
+                        ResponseCode.SUCCESS,
+                        ResponseCode.SUCCESS.getMessage(),
+                        successSignIn));
     };
 
     @PostMapping("/sign-out")
@@ -34,7 +40,7 @@ public class UserApiController {
 
     @PostMapping("get-user-info")
     public UserInfo getUserInfo(UserInfo user) {
-        return userService.getUserInfo(user);
+        return null;
     };
 
     @PostMapping("update-info")
@@ -46,17 +52,4 @@ public class UserApiController {
     public void getUserRole(UserInfo user) {
         userService.getUserRole(user);
     };
-
-    @PostMapping("log-in")
-    public ResponseEntity<Boolean> logIn(UserInfo user) {
-        Boolean loginStatus = userService.logIn(user);
-        return ResponseEntity.ok(loginStatus);
-    };
-
-    @PostMapping("log-out")
-    public boolean logOut(UserInfo user) {
-        userService.logOut(user);
-        return false;
-    };
-
 }

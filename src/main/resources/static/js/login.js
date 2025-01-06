@@ -41,15 +41,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const data = await response.json();
     if (response.status === 200) {
       if (data) {
-        resultModalBody.textContent = "회원가입이 성공적으로 완료되었습니다.";
-        setTimeout(() => (window.location.href = ""), 1000);
+        console.log(data);
       } else {
-        resultModalBody.textContent = "회원가입에 실패했습니다. 다시 시도해주세요.";
+        console.log("로그인 실패");
       }
-      resultModal.show();
     } else {
-      resultModalBody.textContent = "오류가 발생했습니다. 다시 시도해주세요.";
-      resultModal.show();
+      console.log("로그인 실패");
     }
   });
 });

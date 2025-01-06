@@ -19,6 +19,8 @@ public class AuthService {
             throw new IllegalArgumentException("User not found");
         }
 
+        // TODO: 사용자가 입력한 비밀번호를 암호사
+        // TODO: 사용자가 입력한 비밀번호와 암호화된 비밀번호를 비교
         if (!findUser.getPassword().equals(user.getPassword())) {
             throw new IllegalArgumentException("Password is incorrect");
         }
